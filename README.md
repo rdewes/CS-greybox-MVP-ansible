@@ -4,7 +4,7 @@ also contains additional playbooks written for the CS grey box MVP
 
 <more about CS greybox MVP here, eventually...>
 
-**original readme from ansible-oracle-modules follows from here...**
+**original readme from oravirt/ansible-oracle-modules follows from here...**
 
 - If you have any questions/requests just create an issue and I'll look into it
 - I've also included a playbook (test-modules.yml) that'll give you an idea on how the modules can be used.
