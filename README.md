@@ -2,7 +2,7 @@
  - forked from oravirt / ansible-oracle-modules
  - also contains additional playbooks written for the CS grey box MVP
 
-<more about CS greybox MVP here, eventually...>
+ - <more details about CS greybox MVP, eventually...>
 
 **original readme from oravirt/ansible-oracle-modules follows from here...**
 
