@@ -6,9 +6,6 @@
 
 **original readme from oravirt/ansible-oracle-modules follows from here...**
 
-- If you have any questions/requests just create an issue and I'll look into it
-- I've also included a playbook (test-modules.yml) that'll give you an idea on how the modules can be used.
-
 To use the modules, create a 'library' directory next to your top level playbooks and put the different modules in that directory. Then just reference them as you would any other module.
 For more information, check out: http://docs.ansible.com/developing_modules.html
 
