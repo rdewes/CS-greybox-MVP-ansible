@@ -1,5 +1,7 @@
 # forked from oravirt / ansible-oracle-modules
-**Oracle modules for Ansible**
+with additional playbooks written for the CS grey box MVP
+
+**original readme from ansible-oracle-modules follows from here...**
 
 - If you have any questions/requests just create an issue and I'll look into it
 - I've also included a playbook (test-modules.yml) that'll give you an idea on how the modules can be used.
