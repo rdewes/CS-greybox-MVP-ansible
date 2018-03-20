@@ -1,7 +1,9 @@
-# CS-greybox-MVP-ansible
- - forked from oravirt / ansible-oracle-modules
- - also contains additional playbooks written for the CS grey box MVP
+# CS Grey Box MVP
+Ansible playbooks for the CS grey box MVP
 
- - <more details about CS greybox MVP, eventually...>
+Started life as a fork of https://github.com/oravirt/ansible-oracle-modules.git -
+we also need cx_oracle, from here: https://oracle.github.io/python-cx_Oracle/
 
-original readme from ansible-oracle-modules is now at orig-README.md
+Contains playbooks written for the CS grey box MVP
+
+Original readme from ansible-oracle-modules is now at orig-README.md
