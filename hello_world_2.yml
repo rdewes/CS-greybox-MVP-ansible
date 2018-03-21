@@ -8,3 +8,5 @@
     - name: Hello Message
       debug:
         msg: "Hello World! - copied from the ansible-tower-samples GitHub repo"
+    - name: Show Which User We Are
+      command: id
