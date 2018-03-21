@@ -23,18 +23,9 @@
     dba_user:
       - { schema: dbauser, schema_password: dbauser, state: present, default_tablespace: users, grants: "dba" }
     passw_user:
-      - schema: userpw 
-          schema_password: userpw
-          state: present
-          default_tablespace: newtbs
-          grants: 
-            - "approle1"
+      - { schema: userpw, schema_password: userpw, state: present, default_tablespace: newtbs, grants: "approle1" }
     roles:
-      - name: approle1
-          role_grants: 
-            - 'create session'
-            - 'select any table'
-          state: present
+      - { name: approle1, role_grants: "create session, select any table", state: present }
   tasks:
     - name: Create tablespace
         oracle_tablespace: hostname={{ hostname }} service_name={{ service_name }} user={{ user }} password={{ password }} tablespace={{ item.name }} datafile={{ item.datafile }} size={{ item.size }} bigfile={{ item.bigfile }} autoextend={{ item.autoextend }} next={{ item.next }} maxsize={{ item.maxsize }} content={{ item.content }} state={{ item.state }}
