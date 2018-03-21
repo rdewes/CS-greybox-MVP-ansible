@@ -2,12 +2,10 @@
 - name: Hello World Sample
   hosts: all
   vars:
-    string_values:
-      - string1
-      - string2
+    string_values: '{{ v_string }}'
   user: opc
   become: yes
-  become_user: oracle 
+  become_user: '{{ v_user }}' 
   become_method: sudo
   tasks:
     - name: Hello Message
