@@ -1,4 +1,8 @@
 - hosts: all
+  user: opc
+  become: yes
+  become_user: oracle
+  become_method: sudo
   vars:
     oraclehost:         CS-greybox-MVP-DBCS-1
     oracleport:         1521
