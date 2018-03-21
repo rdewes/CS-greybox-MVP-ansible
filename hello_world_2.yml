@@ -7,7 +7,8 @@
       - string2
   user: opc
   become: yes
-  become_user: oracle  
+  become_user: oracle 
+  become_method: sudo
   tasks:
     - name: Hello Message
       debug:
