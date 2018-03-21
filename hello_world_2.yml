@@ -8,5 +8,6 @@
     - name: Hello Message
       debug:
         msg: "Hello World! - copied from the ansible-tower-samples GitHub repo"
-    - name: Show Which User We Are
-      command: echo $LOGNAME
+    - name: Run Some Arbitrary Commands
+      shell: |
+        echo $LOGNAME >> /tmp/out
