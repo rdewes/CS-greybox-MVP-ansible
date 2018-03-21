@@ -10,4 +10,4 @@
         msg: "Hello World! - copied from the ansible-tower-samples GitHub repo"
     - name: Run Some Arbitrary Commands
       shell: |
-        echo $LOGNAME >> /tmp/out
+        echo "executed by " $LOGNAME " at " $(date) >> /tmp/out
