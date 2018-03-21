@@ -1,6 +1,6 @@
 
 - name: Hello World Sample
-  hosts: all
+  hosts: dbcs
   user: opc
   tasks:
     - name: Hello Message
