@@ -4,11 +4,11 @@
   become_user: oracle
   become_method: sudo
   vars:
-    oraclehost:         CS-greybox-MVP-DBCS-1
-    oracleport:         1521
-    oracleservice:      APIPCS.588919103.oraclecloud.internal
-    oracleuser:         system
-    oraclepassword:     super45CS#
+    oraclehost:         "{{ p_host }}"
+    oracleport:         "{{ p_port }}"
+    oracleservice:      "{{ p_service }}"
+    oracleuser:         "{{ p_dba_user }}"
+    oraclepassword:     "{{ p_password }}"
     oracle_env:
       ORACLE_HOME:      /u01/app/oracle/product/12.2.0/dbhome_1
       LD_LIBRARY_PATH:  /u01/app/oracle/product/12.2.0/dbhome_1/lib
