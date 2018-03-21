@@ -1,0 +1,11 @@
+
+- name: Hello World Sample
+  hosts: all
+  user: opc
+  become: yes
+  become_user: oracle
+  become_method: sudo
+  tasks:
+    - name: Hello Message
+      debug:
+        msg: "Hello World! - copied from the ansible-tower-samples GitHub repo"
