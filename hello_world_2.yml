@@ -3,7 +3,7 @@
   hosts: all
   user: opc
   become: yes
-  become_user: oracle  
+  become_user: root  
   tasks:
     - name: Hello Message
       debug:
