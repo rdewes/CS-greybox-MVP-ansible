@@ -17,16 +17,11 @@
       ORACLE_HOME: "{{ oracle_home }}"
       LD_LIBRARY_PATH: "{{ oracle_home }}/lib"
     tablespaces:
-      - { name: newtbs, size: 5M, bigfile: True, autoextend: false , next: 5M, maxsize: 500M, content: permanent, state: present } 
+      - { name: newtbs, size: 5M, bigfile: True, autoextend: false, next: 5M, maxsize: 500M, content: permanent, state: present } 
       - { name: newundo, size: 5M, bigfile: false, autoextend: true, next: 5M, maxsize: 500M, content: undo, state: present } 
       - { name: newtemp, size: 5M, bigfile: false, autoextend: on, next: 5M, maxsize: 500M, content: temp, state: present } 
     dba_user:
-      - schema: dbauser
-        schema_password: dbauser
-        state: present
-        default_tablespace: users
-        grants: 
-          - "dba"
+      - { schema: dbauser, schema_password: dbauser, state: present, default_tablespace: users, grants: "dba" }
     passw_user:
       - schema: userpw 
           schema_password: userpw
