@@ -28,27 +28,27 @@
       - { name: approle1, role_grants: "create session, select any table", state: present }
   tasks:
     - name: Create tablespace
-        oracle_tablespace: hostname={{ hostname }} service_name={{ service_name }} user={{ user }} password={{ password }} tablespace={{ item.name }} datafile={{ item.datafile }} size={{ item.size }} bigfile={{ item.bigfile }} autoextend={{ item.autoextend }} next={{ item.next }} maxsize={{ item.maxsize }} content={{ item.content }} state={{ item.state }}
+        oracle_tablespace: hostname="{{ hostname }}" service_name="{{ service_name }}" user="{{ user }}" password="{{ password }}" tablespace="{{ item.name }}" size="{{ item.size }}" bigfile="{{ item.bigfile }}" autoextend="{{ item.autoextend }}" next="{{ item.next }}" maxsize="{{ item.maxsize }}" content="{{ item.content }}" state="{{ item.state }}"
         environment: oracle_env
         with_items: tablespaces
     - name: Create application role
-        oracle_role: hostname={{ hostname }} service_name={{ service_name }} user={{ user }} password={{ password }} role={{ item.name }} state={{ item.state }}                 
+        oracle_role: hostname="{{ hostname }}" service_name="{{ service_name }}" user="{{ user }}" password="{{ password }}" role="{{ item.name }}" state="{{ item.state }}"                 
         environment: oracle_env
         with_items: roles
     - name: Add grants to role
-        oracle_grants: hostname={{ hostname }} service_name={{ service_name }} user={{ user }} password={{ password }} role={{ item.0.name }} grants="{{ item.1 }}" state={{ item.0.state }}
+        oracle_grants: hostname="{{ hostname }}" service_name="{{ service_name }}" user="{{ user }}" password="{{ password }}" role="{{ item.0.name }}" grants="{{ item.1 }}" state={{ item.0.state }}
         environment: oracle_env
         with_subelements: 
           - roles
           - role_grants
     - name: Create DBA user
-        oracle_user: hostname={{ hostname }} service_name={{ service_name }} mode=normal user={{ user }} password={{ password }} schema={{ item.0.schema }} schema_password_hash={{ item.0.schema_password_hash }} state={{ item.0.state }} default_tablespace={{ item.0.default_tablespace }} grants={{ item.1 }}
+        oracle_user: hostname="{{ hostname }}" service_name="{{ service_name }}" mode=normal user="{{ user }}" password="{{ password }}" schema="{{ item.0.schema }}" schema_password="{{ item.0.schema_password }}" state="{{ item.0.state }}" default_tablespace="{{ item.0.default_tablespace }}" grants="{{ item.1 }}"
         environment: oracle_env
         with_subelements: 
           - dba_user
           - grants
     - name: Create Application user
-        oracle_user: hostname={{ hostname }} service_name={{ service_name }} mode=normal user={{ user }} password={{ password }} schema={{ item.0.schema }} schema_password={{ item.0.schema_password }} state={{ item.0.state }} default_tablespace={{ item.0.default_tablespace }} grants={{ item.1 }}
+        oracle_user: hostname="{{ hostname }}" service_name="{{ service_name }}" mode=normal user="{{ user }}" password="{{ password }}" schema="{{ item.0.schema }}" schema_password="{{ item.0.schema_password }}" state="{{ item.0.state }}" default_tablespace="{{ item.0.default_tablespace }}" grants="{{ item.1 }}"
         environment: oracle_env
         with_subelements: 
           - passw_user
