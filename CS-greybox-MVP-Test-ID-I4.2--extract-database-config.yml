@@ -4,8 +4,8 @@
     oraclehost:         "{{ p_host }}"
     oracleport:         "{{ p_port }}"
     oracleservice:      "{{ p_service }}"
-    oracleuser:         "{{ p_dba_user }}"
-    oraclepassword:     "{{ p_password }}"
+    oracleuser:         "{{ p_dba_un }}"
+    oraclepassword:     "{{ p_dba_pw }}"
     oracle_env:
       ORACLE_HOME:      /u01/app/oracle/product/12.2.0/dbhome_1
       LD_LIBRARY_PATH:  /u01/app/oracle/product/12.2.0/dbhome_1/lib
