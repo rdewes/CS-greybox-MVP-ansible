@@ -1,5 +1,6 @@
 
 - name: Hello World Sample
+  hosts: all
   user: opc
   become: yes
   become_user: root  
