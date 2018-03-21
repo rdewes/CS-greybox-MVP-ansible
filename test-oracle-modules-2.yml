@@ -6,40 +6,40 @@
   become_user: oracle
   become_method: sudo  
   vars:
-      oracle_home: /u01/app/oracle/product/12.2.0/dbhome_1
-      hostname: cs-greybox-mvp-dbcs-1
-      service_name: testpdb1.588919103.oraclecloud.internal
-      set_init_mode: sysdba
-      set_init_user: sys
-      user: system
-      password: super45CS#
-      oracle_env:
-        ORACLE_HOME: "{{ oracle_home }}"
-        LD_LIBRARY_PATH: "{{ oracle_home }}/lib"
-      tablespaces:
-        - { name: newtbs, size: 5M, bigfile: True, autoextend: false , next: 5M, maxsize: 500M, content: permanent, state: present } 
-        - { name: newundo, size: 5M, bigfile: false, autoextend: true, next: 5M, maxsize: 500M, content: undo, state: present } 
-        - { name: newtemp, size: 5M, bigfile: false, autoextend: on, next: 5M, maxsize: 500M, content: temp, state: present } 
-      dba_user:
-        - schema: dbauser
-            schema_password: dbauser
-            state: present
-            default_tablespace: users
-            grants: 
-              - "dba"
-      passw_user:
-        - schema: userpw 
-            schema_password: userpw
-            state: present
-            default_tablespace: newtbs
-            grants: 
-              - "approle1"
-      roles:
-        - name: approle1
-            role_grants: 
-              - 'create session'
-              - 'select any table'
-            state: present
+    oracle_home: /u01/app/oracle/product/12.2.0/dbhome_1
+    hostname: cs-greybox-mvp-dbcs-1
+    service_name: testpdb1.588919103.oraclecloud.internal
+    set_init_mode: sysdba
+    set_init_user: sys
+    user: system
+    password: super45CS#
+    oracle_env:
+      ORACLE_HOME: "{{ oracle_home }}"
+      LD_LIBRARY_PATH: "{{ oracle_home }}/lib"
+    tablespaces:
+      - { name: newtbs, size: 5M, bigfile: True, autoextend: false , next: 5M, maxsize: 500M, content: permanent, state: present } 
+      - { name: newundo, size: 5M, bigfile: false, autoextend: true, next: 5M, maxsize: 500M, content: undo, state: present } 
+      - { name: newtemp, size: 5M, bigfile: false, autoextend: on, next: 5M, maxsize: 500M, content: temp, state: present } 
+    dba_user:
+      - schema: dbauser
+        schema_password: dbauser
+        state: present
+        default_tablespace: users
+        grants: 
+          - "dba"
+    passw_user:
+      - schema: userpw 
+          schema_password: userpw
+          state: present
+          default_tablespace: newtbs
+          grants: 
+            - "approle1"
+    roles:
+      - name: approle1
+          role_grants: 
+            - 'create session'
+            - 'select any table'
+          state: present
   tasks:
     - name: Create tablespace
         oracle_tablespace: hostname={{ hostname }} service_name={{ service_name }} user={{ user }} password={{ password }} tablespace={{ item.name }} datafile={{ item.datafile }} size={{ item.size }} bigfile={{ item.bigfile }} autoextend={{ item.autoextend }} next={{ item.next }} maxsize={{ item.maxsize }} content={{ item.content }} state={{ item.state }}
