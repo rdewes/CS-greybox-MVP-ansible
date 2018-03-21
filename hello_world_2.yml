@@ -1,6 +1,10 @@
 
 - name: Hello World Sample
   hosts: all
+  vars:
+    string_values:
+      - string1
+      - string2
   user: opc
   become: yes
   become_user: oracle  
@@ -9,4 +13,6 @@
       debug:
         msg: "Hello World! - copied from the ansible-tower-samples GitHub repo"
     - name: Run Some Arbitrary Commands
-      shell: echo "this playbook was executed by" $LOGNAME "at" $(date) >> /tmp/out
+      shell: |
+        echo "this playbook was executed by" $LOGNAME "at" $(date) "with string value" {{ item }} >> /tmp/out
+      with_items: string_values
