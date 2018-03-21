@@ -22,7 +22,7 @@
         - { name: newtemp, size: 5M, bigfile: false, autoextend: on, next: 5M, maxsize: 500M, content: temp, state: present } 
       dba_user:
         - schema: dbauser
-            schema_password_hash: "B7C930D09B3AF263"
+            schema_password: dbauser
             state: present
             default_tablespace: users
             grants: 
