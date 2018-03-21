@@ -1,7 +1,7 @@
 
 - name: Hello World Sample
   hosts: all
-  user: opc
+  user: root
   become: yes
   become_user: oracle
   become_method: sudo
