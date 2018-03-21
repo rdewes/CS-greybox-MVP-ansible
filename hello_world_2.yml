@@ -1,7 +1,8 @@
 
 - name: Hello World Sample
   hosts: all
-  user: opc
+  sudo: yes
+  sudo_user: opc  
   tasks:
     - name: Hello Message
       debug:
