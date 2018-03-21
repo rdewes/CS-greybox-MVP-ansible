@@ -28,22 +28,22 @@
       - { name: approle1, role_grants: "create session, select any table", state: present }
   tasks:
     - name: Create tablespace
-        oracle_tablespace:
-          hostname:       "{{ hostname }}" 
-          service_name:   "{{ service_name }}" 
-          user:           "{{ user }}" 
-          password:       "{{ password }}" 
-          tablespace:     "{{ item.name }}" 
-          size:           "{{ item.size }}" 
-          bigfile:        "{{ item.bigfile }}" 
-          autoextend:     "{{ item.autoextend }}" 
-          next:           "{{ item.next }}" 
-          maxsize:        "{{ item.maxsize }}" 
-          content:        "{{ item.content }}" 
-          state:          "{{ item.state }}"
-          environment:    "{{ oracle_env }}"
-          with_items: 
-            - tablespaces
+      oracle_tablespace:
+        hostname:       "{{ hostname }}" 
+        service_name:   "{{ service_name }}" 
+        user:           "{{ user }}" 
+        password:       "{{ password }}" 
+        tablespace:     "{{ item.name }}" 
+        size:           "{{ item.size }}" 
+        bigfile:        "{{ item.bigfile }}" 
+        autoextend:     "{{ item.autoextend }}" 
+        next:           "{{ item.next }}" 
+        maxsize:        "{{ item.maxsize }}" 
+        content:        "{{ item.content }}" 
+        state:          "{{ item.state }}"
+        environment:    "{{ oracle_env }}"
+        with_items: 
+          - tablespaces
     - name: Create application role
         oracle_role: hostname="{{ hostname }}" service_name="{{ service_name }}" user="{{ user }}" password="{{ password }}" role="{{ item.name }}" state="{{ item.state }}"                 
         environment: oracle_env
