@@ -15,4 +15,4 @@
     - name: Run Some Arbitrary Commands
       shell: |
         echo "this playbook was executed by" $LOGNAME "at" $(date) "with string value" {{ item }} >> /tmp/out
-      with_items: string_values
+      with_items: {{ string_values }}
