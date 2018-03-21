@@ -1,0 +1,22 @@
+- hosts: all
+  vars:
+    oraclehost:         CS-greybox-MVP-DBCS-1
+    oracleport:         1521
+    oracleservice:      APIPCS.588919103.oraclecloud.internal
+    oracleuser:         system
+    oraclepassword:     super45CS#
+    oracle_env:
+      ORACLE_HOME:      /u01/app/oracle/product/12.2.0/dbhome_1
+      LD_LIBRARY_PATH:  /u01/app/oracle/product/12.2.0/dbhome_1/lib
+  tasks:
+    - name: gather database facts
+      oracle_facts:
+        hostname:       "{{ oraclehost }}"
+        port:           "{{ oracleport }}"
+        service_name:   "{{ oracleservice }}"
+        user:           "{{ oracleuser }}"
+        password:       "{{ oraclepassword }}"
+      register: dbfacts
+    - debug:
+        var: dbfacts
+        
