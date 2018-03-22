@@ -16,12 +16,13 @@
   tasks:
     - name: create the pdb
       oracle_pdb: 
-        name:           "{{ pdbname }}"
+        hostname:       "{{ hostname }}"
+        port:           "{{ port }}"
+        service_name:   "{{ service_name }}"
         sourcedb:       "{{ sourcedb }}"
-        state:          "{{ state }}"
+        name:           "{{ pdbname }}"
         username:       "{{ username }}"
         password:       "{{ password }}"
         mode:           "{{ mode }}"
-        service_name:   "{{ service_name }}"
-        hostname:       "{{ hostname }}"
+        state:          "{{ state }}"
         oracle_home:    "{{ oracle_home }}"
