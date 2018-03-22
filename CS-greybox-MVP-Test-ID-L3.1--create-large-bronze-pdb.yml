@@ -2,13 +2,13 @@
 - name: Create a PDB
   hosts: all
   vars:
-    hostname:           cs-greybox-mvp-dbcs-1
-    port:               1521    
-    service_name:       APIPCS.588919103.oraclecloud.internal
-    sourcedb:           APIPCS
+    hostname:           "{{ p_host }}"
+    port:               "{{ p_port }}"
+    service_name:       "{{ p_service }}"
+    sourcedb:           "{{ p_cdb_name }}"
     pdbname:            "{{ p_pdb_name }}"
-    username:           sys
-    password:           super45CS#
+    username:           "{{ p_sysdba_un }}"
+    password:           "{{ p_sysdba_pw }}"
     mode:               sysdba
     state:              present
     oracle_home:        /u01/app/oracle/product/12.2.0/dbhome_1
