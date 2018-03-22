@@ -1,4 +1,4 @@
-- name: Create a PDB
+- name: Open/Close a PDB
   hosts: all
   vars:
     hostname:           "{{ p_host }}"
@@ -13,7 +13,7 @@
     oracle_home:        /u01/app/oracle/product/12.2.0/dbhome_1
     
   tasks:
-    - name: create the pdb
+    - name: open or close the pdb
       oracle_pdb: 
         hostname:       "{{ hostname }}"
         port:           "{{ port }}"
