@@ -24,4 +24,4 @@
         password:       "{{ password }}"
         mode:           "{{ mode }}"
         state:          "{{ state }}"
-oracle_home: "{{ oracle_home }}"
+        oracle_home:    "{{ oracle_home }}"
