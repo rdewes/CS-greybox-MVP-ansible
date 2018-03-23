@@ -16,9 +16,6 @@
         echo "this playbook was executed by" $LOGNAME "at" $(date) "with string value:" {{ string_values }}
         echo "second line of stdout"
         echo "third line"
-        duffcommand
       register: p_out
     - debug:
         var: p_out.stdout_lines
-    - debug:
-        var: p_out.stderr_lines
