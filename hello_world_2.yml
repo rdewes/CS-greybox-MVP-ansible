@@ -20,5 +20,5 @@
       register: p_out
     - debug:
         var: p_out.stdout_lines
-    - debug
+    - debug:
         var: p_out.stderr_lines
