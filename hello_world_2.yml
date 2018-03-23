@@ -17,4 +17,4 @@
       with_items: "{{ string_values }}"
       register: out
     - debug:
-        var: out
+        var: out.stdout_lines
