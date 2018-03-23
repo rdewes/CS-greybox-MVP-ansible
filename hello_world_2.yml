@@ -14,6 +14,6 @@
     - name: Run Some Arbitrary Commands
       shell: |
         echo "this playbook was executed by" $LOGNAME "at" $(date) "with string value:" {{ string_values }}
-      register: out
-    - debug: stdout
-        var: out.stdout_lines
+      register: p_out
+    - debug:
+        var: p_out.stdout_lines
