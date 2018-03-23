@@ -12,7 +12,7 @@
       debug:
         msg: "Hello World! - copied from the ansible-tower-samples GitHub repo"
     - name: Run Some Arbitrary Commands
-      command: |
+      shell: |
         echo "this playbook was executed by" $LOGNAME "at" $(date) "with string value" {{ item }}
       with_items: "{{ string_values }}"
       register: out
