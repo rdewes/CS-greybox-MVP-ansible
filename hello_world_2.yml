@@ -16,5 +16,5 @@
         echo "this playbook was executed by" $LOGNAME "at" $(date) "with string value" {{ item }}
       with_items: "{{ string_values }}"
       register: shell_output
-      debug:
+    - debug:
         msg: "{{ shell_output.stdout }}"
