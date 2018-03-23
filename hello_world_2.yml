@@ -16,4 +16,4 @@
         echo "this playbook was executed by" $LOGNAME "at" $(date) "with string value" {{ string_values }}
       register: out
     - debug:
-        var: out.results
+        var: out.stdout_lines
