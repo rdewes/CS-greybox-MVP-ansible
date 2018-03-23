@@ -13,7 +13,7 @@
         msg: "Hello World! - copied from the ansible-tower-samples GitHub repo"
     - name: Run Some Arbitrary Commands
       shell: |
-        echo "this playbook was executed by" $LOGNAME "at" $(date) "with string value" {{ string_values }}
+        echo "this playbook was executed by" $LOGNAME "at" $(date) "with string value:" {{ string_values }}
       register: out
     - debug:
         var: out.stdout_lines
