@@ -17,5 +17,6 @@
         echo "second line of stdout"
         echo "third line"
       register: p_out
-    - debug:
+    - name: Output
+      debug:
         var: p_out.stdout_lines
