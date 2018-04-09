@@ -40,5 +40,5 @@
                         select service_name 
                         from   v$services 
                         where  service_name like '%{{ pdbname }}%'
+      when: p_out.msg.find('created') != -1
       register: p_new_service_name
-      when: p_out.find('created') = 1
