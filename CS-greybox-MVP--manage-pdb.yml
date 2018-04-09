@@ -58,8 +58,8 @@
           size:           "{{ item.1.size }}"
           state:          present
         with_nested: 
-          - {{ p_new_service_name.msg }}
-          - {{ p_tablespaces }}
+          - "{{ p_new_service_name.msg }}"
+          - "{{ p_tablespaces }}"
         register: p_tblspc_out
       - name: show output from tablespace creation
         debug:
