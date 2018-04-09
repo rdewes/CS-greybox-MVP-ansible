@@ -10,6 +10,7 @@
     password:           "{{ p_sysdba_pw }}"
     mode:               sysdba
     state:              "{{ p_state }}"
+    tablespaces:        "{{ p_tablespaces }}"
     oracle_home:        /u01/app/oracle/product/12.2.0/dbhome_1
     
   tasks:
@@ -49,14 +50,16 @@
         oracle_tablespace:
           hostname:       "{{ hostname }}" 
           port:           "{{ port }}"
-          service_name:   "{{ item }}"
+          service_name:   "{{ item.0 }}"
           user:           "{{ username }}"
           password:       "{{ password }}"
           mode:           "{{ mode }}"
-          tablespace:     userdata01
+          tablespace:     "{{ item.1.name }}"
+          size:           "{{ item.1.size }}"
           state:          present
-          size:           32m
-        with_items: "{{ p_new_service_name.msg }}"    # iterating over our "list" (with one entry) of service names
+        with_subelements: 
+          - p_new_service_name.msg
+          - p_tablespaces
         register: p_tblspc_out
       - name: show output from tablespace creation
         debug:
