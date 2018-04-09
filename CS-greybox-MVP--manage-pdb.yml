@@ -59,7 +59,7 @@
     - name: looping over list from p_new_service_name.msg
       debug:
         msg: the value of p_new_service_name.msg.item is "{{ item }}"
-        with_items: p_new_service_name.msg
+      with_items: p_new_service_name.msg
         
 #        var: "{{ p_new_service_name.msg | regex_findall('([a-zA-Z0-9]*\\.)[a-zA-Z0-9]*') }}"
 #      when: p_new_service_name is defined
