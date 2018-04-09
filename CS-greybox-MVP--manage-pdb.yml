@@ -48,7 +48,8 @@
       debug:
         var: p_new_service_name.msg
       when: p_new_service_name is defined
-    - oracle_tablespace:
+    - name: create a tablespace
+      oracle_tablespace:
         hostname:       "{{ hostname }}" 
         port:           "{{ port }}"
         service_name:   "{{ p_new_service_name }}"
