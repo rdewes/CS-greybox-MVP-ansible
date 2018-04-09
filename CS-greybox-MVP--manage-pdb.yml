@@ -46,7 +46,8 @@
       register: p_new_service_name
     - name: show new service name
       debug:
-        msg: the service name is {{ p_new_service_name.msg | type_debug }}
+        msg: the value of p_new_service name is {{ p_new_service_name}}
+        msg: the value of p_new_service_name.msg is {{ p_new_service_name.msg }}
 #        var: "{{ p_new_service_name.msg | regex_findall('([a-zA-Z0-9]*\\.)[a-zA-Z0-9]*') }}"
       when: p_new_service_name is defined
 #    - name: create a tablespace
