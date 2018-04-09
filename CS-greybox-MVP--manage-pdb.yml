@@ -41,9 +41,9 @@
                         select name 
                         from   v$services 
                         where  name like '%{{ pdbname }}%'
-      when: p_out.msg.find('created') != -1
+      when: p_out.msg.find('Successfully created') != -1
       register: p_new_service_name
     - name: show new service name
       debug:
         var: p_new_service_name
-      when p_out.msg.find('created') != -1
+      when: p_new_service_name is defined
