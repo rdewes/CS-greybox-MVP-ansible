@@ -56,7 +56,7 @@
     - name: p_new_service_name.msg - value
       debug:
         msg: the value of p_new_service_name.msg is {{ p_new_service_name.msg }}
-    - name: splitting list from p_new_service_name.msg
+    - name: looping over list from p_new_service_name.msg
       debug:
         msg: the value of p_new_service_name.msg.item is {{ item }}
         loop: "{{ p_new_service_name.msg }}" 
