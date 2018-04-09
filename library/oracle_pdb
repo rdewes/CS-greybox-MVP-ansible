@@ -240,6 +240,7 @@ def ensure_pdb_state(cursor, module, msg, name, state, newpdb):
         wanted_state = [('read write','yes')]
         ensure_sql += 'open restricted force'
 
+    ensure_sql += ' instances=all'
 
     if wanted_state == state_now:
         if newpdb:
