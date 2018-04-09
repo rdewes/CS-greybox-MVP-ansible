@@ -25,10 +25,10 @@
         mode:           "{{ mode }}"
         state:          "{{ state }}"
         oracle_home:    "{{ oracle_home }}"
-      register: p_out
+      register: p_pdb_out
     - name: output
       debug:
-        var: p_out.msg
+        var: p_pdb_out.msg
     - name: retrieve new service name
       oracle_sql: 
         hostname:       "{{ hostname }}" 
@@ -40,10 +40,27 @@
         sql:            >
                         select name 
                         from   v$services 
-                        where  name like '%{{ pdbname }}%'
-      when: p_out.msg.find('Successfully created') != -1
+                        where  name like '{{ pdbname }}.%'
+                        and    rownum = 1
+      when: p_pdb_out.msg.find('Successfully created') != -1
       register: p_new_service_name
     - name: show new service name
       debug:
-        var: p_new_service_name
+        var: p_new_service_name.msg
       when: p_new_service_name is defined
+    - oracle_tablespace:
+        hostname:       "{{ hostname }}" 
+        port:           "{{ port }}"
+        service_name:   "{{ p_new_service_name }}"
+        user:           "{{ username }}"
+        password:       "{{ password }}"
+        mode:           "{{ mode }}"
+        tablespace:     userdata01
+        state:          present
+        size:           32m
+      when: p_new_service_name is defined
+      register: p_tblspc_out
+    - debug:
+        var: p_tblspc_out
+      when p_tblspc_out is defined
+    
