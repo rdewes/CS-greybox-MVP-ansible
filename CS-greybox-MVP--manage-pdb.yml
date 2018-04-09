@@ -52,7 +52,7 @@
       oracle_tablespace:
         hostname:       "{{ hostname }}" 
         port:           "{{ port }}"
-        service_name:   "{{ p_new_service_name }}"
+        service_name:   "{{ p_new_service_name.msg }}"
         user:           "{{ username }}"
         password:       "{{ password }}"
         mode:           "{{ mode }}"
