@@ -52,7 +52,7 @@
       oracle_tablespace:
         hostname:       "{{ hostname }}" 
         port:           "{{ port }}"
-        service_name:   "{{ p_new_service_name.msg | regex_replace('[]') }}"
+        service_name:   "{{ p_new_service_name.msg | regex_findall('(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])') }}"
         user:           "{{ username }}"
         password:       "{{ password }}"
         mode:           "{{ mode }}"
