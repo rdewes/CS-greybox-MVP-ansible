@@ -46,13 +46,13 @@
       register: p_new_service_name
     - name: p_new_service_name - type
       debug:
-        msg: the type of p_new_service_name is {{ p_new_service_name | debug_type }}
+        msg: the type of p_new_service_name is {{ p_new_service_name | type_debug }}
     - name: p_new_service_name - value
       debug:
         msg: the value of p_new_service_name is {{ p_new_service_name }}
     - name: p_new_service_name.msg - type
       debug:
-        msg: the type of p_new_service_name.msg is {{ p_new_service_name.msg | debug_type }}
+        msg: the type of p_new_service_name.msg is {{ p_new_service_name.msg | type_debug }}
     - name: p_new_service_name.msg - value
       debug:
         msg: the value of p_new_service_name.msg is {{ p_new_service_name.msg }}
