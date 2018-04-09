@@ -57,7 +57,7 @@
           tablespace:     "{{ item.1.name }}"
           size:           "{{ item.1.size }}"
           state:          present
-        with_subelements: 
+        with_items: 
           - p_new_service_name.msg
           - p_tablespaces
         register: p_tblspc_out
