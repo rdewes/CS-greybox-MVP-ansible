@@ -63,5 +63,4 @@
       register: p_tblspc_out
     - debug:
         var: p_tblspc_out
-      when p_tblspc_out is defined
-    
+      when: p_tblspc_out is defined
