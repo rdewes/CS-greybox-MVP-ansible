@@ -28,4 +28,4 @@
       register: p_out
     - name: output
       debug:
-        var: p_out
+        var: p_out.msg
