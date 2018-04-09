@@ -56,6 +56,9 @@
     - name: p_new_service_name.msg - value
       debug:
         msg: the value of p_new_service_name.msg is {{ p_new_service_name.msg }}
+    - name: splitting list from p_new_service_name.msg
+      debug:
+        msg: the value of p_new_service_name.msg is {{ p_new_service_name.msg.split[0] }}
 #        var: "{{ p_new_service_name.msg | regex_findall('([a-zA-Z0-9]*\\.)[a-zA-Z0-9]*') }}"
 #      when: p_new_service_name is defined
 #    - name: create a tablespace
