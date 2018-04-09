@@ -1,0 +1,31 @@
+- name: manage a PDB
+  hosts: all
+  vars:
+    hostname:           "{{ p_host }}"
+    port:               "{{ p_port }}"
+    service_name:       "{{ p_service }}"
+    sourcedb:           "{{ p_cdb_name }}"
+    pdbname:            "{{ p_pdb_name }}"
+    username:           "{{ p_sysdba_un }}"
+    password:           "{{ p_sysdba_pw }}"
+    mode:               sysdba
+    state:              "{{ p_state }}"
+    oracle_home:        /u01/app/oracle/product/12.2.0/dbhome_1
+    
+  tasks:
+    - name: put the pdb into the required state
+      oracle_pdb: 
+        hostname:       "{{ hostname }}"
+        port:           "{{ port }}"
+        service_name:   "{{ service_name }}"
+        sourcedb:       "{{ sourcedb }}"
+        name:           "{{ pdbname }}"
+        username:       "{{ username }}"
+        password:       "{{ password }}"
+        mode:           "{{ mode }}"
+        state:          "{{ state }}"
+        oracle_home:    "{{ oracle_home }}"
+      register: p_out
+    - name: output
+      debug:
+        var: p_out.msg
