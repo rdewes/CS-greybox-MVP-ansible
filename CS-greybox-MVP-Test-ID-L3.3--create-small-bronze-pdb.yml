@@ -25,3 +25,7 @@
         mode:           "{{ mode }}"
         state:          "{{ state }}"
         oracle_home:    "{{ oracle_home }}"
+      register: p_out
+    - name: output
+      debug:
+        var: p_out.msg
