@@ -38,8 +38,8 @@
         password:       "{{ password }}"
         mode:           "{{ mode }}"
         sql:            >
-                        select service_name 
+                        select name 
                         from   v$services 
-                        where  service_name like '%{{ pdbname }}%'
+                        where  name like '%{{ pdbname }}%'
       when: p_out.msg.find('created') != -1
       register: p_new_service_name
