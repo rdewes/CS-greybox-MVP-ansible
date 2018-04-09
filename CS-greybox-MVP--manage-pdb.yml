@@ -36,6 +36,7 @@
         service_name:   "{{ service_name }}"
         username:       "{{ username }}"
         password:       "{{ password }}"
+        mode:           "{{ mode }}"
         sql:            >
                         select service_name 
                         from   v$services 
