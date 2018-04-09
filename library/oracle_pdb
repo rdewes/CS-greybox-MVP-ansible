@@ -165,7 +165,8 @@ def create_pdb(cursor, module, msg, oracle_home, name, sourcedb, pdb_admin_usern
         createsql += ' tempfile reuse'
 
     if unplug_dest is None:
-        createsql += ' admin user %s identified by %s ' % (pdb_admin_username, pdb_admin_password)
+#       createsql += ' admin user %s identified by %s ' % (pdb_admin_username, pdb_admin_password)
+        createsql += ' from PDB1 keystore identified by %s ' % (pdb_admin_password)
 
     if datafile_dest != None:
         createsql += ' create_file_dest = \'%s\'' % (datafile_dest)
@@ -297,7 +298,7 @@ def main():
             state                  = dict(default="present", choices = ["present", "absent", "open", "closed", "read_write", "read_only", "restricted", "status", "unplugged"]),
             save_state             = dict(default=True, type = 'bool'),
             pdb_admin_username     = dict(required=False, default = 'pdb_admin', aliases = ['pdbadmun']),
-            pdb_admin_password     = dict(required=False, default = 'pdb_admin', no_log=True, aliases = ['pdbadmpw']),
+            pdb_admin_password     = dict(required=False, default = 'super45CS#', no_log=True, aliases = ['pdbadmpw']),
             datafile_dest          = dict(required=False, aliases = ['dfd','create_file_dest']),
             unplug_dest            = dict(required=False, aliases = ['plug_dest','upd','pd']),
             file_name_convert      = dict(required=False, aliases = ['fnc']),
