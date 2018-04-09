@@ -42,25 +42,25 @@
                         from   v$services 
                         where  name like '{{ pdbname }}.%'
                         and    rownum = 1
-      when: p_pdb_out.msg.find('Successfully created') != -1
+#      when: p_pdb_out.msg.find('Successfully created') != -1
       register: p_new_service_name
     - name: show new service name
       debug:
-        var: p_new_service_name.msg
+        var: {{ p_new_service_name.msg | regex_findall('([a-zA-Z0-9]*\\.)[a-zA-Z0-9]*') }}
       when: p_new_service_name is defined
-    - name: create a tablespace
-      oracle_tablespace:
-        hostname:       "{{ hostname }}" 
-        port:           "{{ port }}"
-        service_name:   "{{ p_new_service_name.msg | regex_findall('([a-zA-Z0-9]*\\.)[a-zA-Z0-9]*') }}"
-        user:           "{{ username }}"
-        password:       "{{ password }}"
-        mode:           "{{ mode }}"
-        tablespace:     userdata01
-        state:          present
-        size:           32m
-      when: p_new_service_name is defined
-      register: p_tblspc_out
-    - debug:
-        var: p_tblspc_out
-      when: p_tblspc_out is defined
+#    - name: create a tablespace
+#      oracle_tablespace:
+#        hostname:       "{{ hostname }}" 
+#        port:           "{{ port }}"
+#        service_name:   "{{ p_new_service_name.msg | regex_findall('([a-zA-Z0-9]*\\.)[a-zA-Z0-9]*') }}"
+#        user:           "{{ username }}"
+#        password:       "{{ password }}"
+#        mode:           "{{ mode }}"
+#        tablespace:     userdata01
+#        state:          present
+#        size:           32m
+#      when: p_new_service_name is defined
+#      register: p_tblspc_out
+#    - debug:
+#        var: p_tblspc_out
+#      when: p_tblspc_out is defined
