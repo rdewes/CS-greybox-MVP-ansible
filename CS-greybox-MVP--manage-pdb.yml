@@ -49,7 +49,7 @@
                           and    rownum = 1
         register: p_new_service_name
       
-      - name: create a tablespace in new pdb, via the new service name
+      - name: create tablespaces in new pdb, via the new service name
         oracle_tablespace:
           hostname:       "{{ hostname }}" 
           port:           "{{ port }}"
