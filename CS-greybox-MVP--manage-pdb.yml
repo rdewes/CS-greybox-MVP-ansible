@@ -67,6 +67,6 @@
         
       - name: show output from tablespace creation
         debug:
-          var: p_tblspc_out.results.msg
+          var: p_tblspc_out.results
       
       when: p_pdb_out.msg.find('Successfully created') != -1      # this is the test for whether the pdb has been newly created
