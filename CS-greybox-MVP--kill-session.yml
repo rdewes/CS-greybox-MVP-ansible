@@ -37,4 +37,4 @@
       - name: kill session
         debug:
           msg: "kill the session"
-      when: p_before.msg.find('Session Exists') > 0       # returns True if the specified session exists
+#      when: p_before.msg.find('Session Exists') > 0       # returns True if the specified session exists
