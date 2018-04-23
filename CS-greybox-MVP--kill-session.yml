@@ -4,8 +4,6 @@
     hostname:           "{{ p_host }}"
     port:               "{{ p_port }}"
     service_name:       "{{ p_service }}"
-    sourcedb:           "{{ p_cdb_name }}"
-    pdbname:            "{{ p_pdb_name }}"
     username:           "{{ p_sysdba_un }}"
     password:           "{{ p_sysdba_pw }}"
     mode:               sysdba
