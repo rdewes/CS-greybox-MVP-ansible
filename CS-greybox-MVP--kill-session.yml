@@ -12,7 +12,7 @@
     inst:               "{{ p_inst }}"
 
   tasks:
-    - name: check existing status of service
+    - name: check existing status of session
       oracle_sql: 
         hostname:       "{{ hostname }}" 
         port:           "{{ port }}"
@@ -26,8 +26,16 @@
                         where  sid = '{{ p_sid }}'
                         and    serial# = '{{ p_serial }}'
                         and    inst_id = '{{ p_inst }}'
-      register: p_service_status_pre
+      register: p_session_status_pre
       
     - name: show output status check (pre)
       debug:
-        var: p_service_status_pre
+        var: p_session_status_pre
+
+    - name: iff the session exists, kill it
+      block:
+      - name: kill-session code will go here, later
+        debug:
+          msg: kill-session code will go here, later
+      
+      when: p_session_status_pre.msg.find('Session Exists') != -1      # returns True if the specified session exists
