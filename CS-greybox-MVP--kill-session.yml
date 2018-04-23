@@ -21,7 +21,7 @@
         password:       "{{ password }}"
         mode:           "{{ mode }}"
         sql:            >
-                        select "Session Exists", inst_id, sid, serial#, username, machine, program, status 
+                        select 'Session Exists', inst_id, sid, serial#, username, machine, program, status 
                         from   gv$session 
                         where  sid = '{{ p_sid }}'
                         and    serial# = '{{ p_serial }}'
