@@ -30,11 +30,11 @@
       
     - name: show output status check (pre)
       debug:
-        var: p_session_status_pre.msg
+        var: p_session_status_pre.msg[0]
       
     - name: iff the session exists, kill it
       block:
       - name: kill session
         debug:
           msg: "kill the session"
-      when: p_session_status_pre.msg == 'Session Exists'       # returns True if the specified session exists
+      when: p_session_status_pre.msg == "Session Exists"       # returns True if the specified session exists
