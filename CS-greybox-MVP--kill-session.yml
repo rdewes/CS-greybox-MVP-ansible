@@ -30,7 +30,7 @@
       
     - name: show output status check (pre)
       debug:
-        var: p_before.msg[0].2
+        var: p_before.msg[0].0
       
     - name: iff the session exists, kill it
       block:
