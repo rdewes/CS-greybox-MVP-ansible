@@ -37,4 +37,4 @@
       - name: kill session
         debug:
           msg: "kill the session"
-      when: '"Session Exists" in p_before.msg[0].1'       # returns True if the specified session exists
+      when: '"Session Exists" in p_before.msg[0].0'       # returns True if the specified session exists
