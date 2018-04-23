@@ -21,7 +21,7 @@
         password:       "{{ password }}"
         mode:           "{{ mode }}"
         sql:            >
-                        select 'Session Exists', inst_id, sid, serial#, username, machine, program, status 
+                        select 'Session Exists', inst_id, sid, serial#, username, machine, program, logon_time, status 
                         from   gv$session 
                         where  sid = '{{ p_sid }}'
                         and    serial# = '{{ p_serial }}'
@@ -30,11 +30,11 @@
       
     - name: show output status check (pre)
       debug:
-        var: p_before
+        var: p_before.msg
       
     - name: iff the session exists, kill it
       block:
       - name: kill session
         debug:
           msg: "kill the session"
-      when: '"Session Exists" in p_before'       # returns True if the specified session exists
+      when: '"Session Exists" in p_before.msg'       # returns True if the specified session exists
