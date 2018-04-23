@@ -1,0 +1,35 @@
+- name: kill a session
+  hosts: all
+  vars:
+    hostname:           "{{ p_host }}"
+    port:               "{{ p_port }}"
+    service_name:       "{{ p_service }}"
+    sourcedb:           "{{ p_cdb_name }}"
+    pdbname:            "{{ p_pdb_name }}"
+    username:           "{{ p_sysdba_un }}"
+    password:           "{{ p_sysdba_pw }}"
+    mode:               sysdba
+    sid:                "{{ p_sid }}"
+    serial:             "{{ p_serial }}"
+    inst:               "{{ p_inst }}"
+
+  tasks:
+    - name: check existing status of service
+      oracle_sql: 
+        hostname:       "{{ hostname }}" 
+        port:           "{{ port }}"
+        service_name:   "{{ service_name }}"
+        username:       "{{ username }}"
+        password:       "{{ password }}"
+        mode:           "{{ mode }}"
+        sql:            >
+                        select inst_id, sid, serial#, username, machine, program, status 
+                        from   gv$session 
+                        where  sid = '{{ p_sid }}'
+                        and    serial# = '{{ p_serial }}'
+                        and    inst_id = '{{ p_inst }}'
+      register: p_service_status_pre
+      
+    - name: show output status check (pre)
+      debug:
+        var: p_service_status_pre
