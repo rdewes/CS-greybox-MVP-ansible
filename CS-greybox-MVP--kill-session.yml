@@ -23,9 +23,9 @@
         sql:            >
                         select 'Session Exists', inst_id, sid, serial#, username, machine, program, logon_time, status 
                         from   gv$session 
-                        where  sid = '{{ p_sid }}'
-                        and    serial# = '{{ p_serial }}'
-                        and    inst_id = '{{ p_inst }}'
+                        where  sid = '{{ sid }}'
+                        and    serial# = '{{ serial }}'
+                        and    inst_id = '{{ inst }}'
       register: p_before
       
     - name: show output status check (pre)
