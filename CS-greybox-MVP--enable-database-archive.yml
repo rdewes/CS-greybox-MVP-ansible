@@ -1,0 +1,38 @@
+- name: move a table to in-database archive
+  hosts: all
+  vars:
+    hostname:           "{{ p_host }}"
+    port:               "{{ p_port }}"
+    service_name:       "{{ p_service }}"
+    username:           "{{ p_dba_un }}"
+    password:           "{{ p_dba_pw }}"
+    mode:               normal
+    owner:              "{{ p_owner }}"
+    tablename:          "{{ p_table }}"
+
+  tasks:
+    - name: check existing status of table
+      oracle_sql: 
+        hostname:       "{{ hostname }}" 
+        port:           "{{ port }}"
+        service_name:   "{{ service_name }}"
+        username:       "{{ username }}"
+        password:       "{{ password }}"
+        mode:           "{{ mode }}"
+        sql:            >
+                        select 'Table Exists', owner, table_name 
+                        from   all_tables 
+                        where  owner = '{{ owner }}'
+                        and    table_name = '{{ tablename }}'
+      register: p_before
+      
+    - name: show output status check (pre)
+      debug:
+        var: p_before.msg[0]
+      
+    - name: iff the table exists, move it
+      block:
+      - name: move table
+        debug:
+          msg: "move the table"
+      when: '"Table Exists" in p_before.msg[0].0'       # do the stuff in this block only if the specified table exists
