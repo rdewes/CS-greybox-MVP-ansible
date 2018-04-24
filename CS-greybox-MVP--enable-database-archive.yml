@@ -20,7 +20,7 @@
         password:       "{{ password }}"
         mode:           "{{ mode }}"
         sql:            >
-                        select 'Table Exists', owner, table_name 
+                        select 'Table Exists', owner, table_name, tablespace_name 
                         from   all_tables 
                         where  owner = '{{ owner }}'
                         and    table_name = '{{ tablename }}'
