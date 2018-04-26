@@ -21,20 +21,47 @@
         password:       "{{ password }}"
         mode:           "{{ mode }}"
         sql:            >
-                        select 'Session Exists', inst_id, sid, serial#, username, machine, program, logon_time, status 
+                        select count(*) 
                         from   gv$session 
                         where  sid = '{{ sid }}'
                         and    serial# = '{{ serial }}'
                         and    inst_id = '{{ inst }}'
-      register: p_before
+      register: p_count
       
     - name: show output status check (pre)
       debug:
-        var: p_before.msg[0]
+        var: p_count.msg[0]
       
-    - name: iff the session exists, kill it
+    - name: if the session exists, kill it
       block:
+      - name: check existing status of session
+        oracle_sql: 
+          hostname:       "{{ hostname }}" 
+          port:           "{{ port }}"
+          service_name:   "{{ service_name }}"
+          username:       "{{ username }}"
+          password:       "{{ password }}"
+          mode:           "{{ mode }}"
+          sql:            >
+                          select 'Session Exists', inst_id, sid, serial#, username, machine, program, logon_time, status 
+                          from   gv$session 
+                          where  sid = '{{ sid }}'
+                          and    serial# = '{{ serial }}'
+                          and    inst_id = '{{ inst }}'
+       register: p_before
+      
+      - name: show output status check (pre)
+        debug:
+          var: p_before.msg[0]      
+      
       - name: kill session
         debug:
           msg: "kill the session"
-      when: '"Session Exists" in p_before.msg[0].0'       # do the stuff in this block only if the specified session exists
+      when: 'p_count.msg[0].0 == 1'
+
+    - name: if there's no matching session exists, say so in debug output
+      block:
+      - name: there was no matching session
+        debug:
+          msg: "there was no session in this instance with the specified SID and serial"
+      when: 'p_count.msg[0].0 == 0'
