@@ -28,7 +28,7 @@
                         and    inst_id = '{{ inst }}'
       register: p_count
       
-    - name: if the session exists, kill it
+    - name: if the session exists (p_count==1), kill it
       block:
       - name: check existing status of session
         oracle_sql: 
@@ -39,7 +39,8 @@
           password:       "{{ password }}"
           mode:           "{{ mode }}"
           sql:            >
-                          select 'Session To Be Killed', inst_id, sid, serial#, username, machine, program, logon_time, status 
+                          select 'Pre-Kill Session Details'
+                          ,      inst_id, sid, serial#, username, machine, program, logon_time, status 
                           from   gv$session 
                           where  sid = '{{ sid }}'
                           and    serial# = '{{ serial }}'
@@ -70,7 +71,8 @@
           password:       "{{ password }}"
           mode:           "{{ mode }}"
           sql:            >
-                          select 'Session Killed', inst_id, sid, serial#, username, machine, program, logon_time, status 
+                          select 'Post-Kill Session Details (look for KILLED in status column'
+                          ,      inst_id, sid, serial#, username, machine, program, logon_time, status 
                           from   gv$session 
                           where  sid = '{{ sid }}'
                           and    serial# = '{{ serial }}'
@@ -84,7 +86,7 @@
       when: 'p_count.msg[0].0 == 1'               # condition returns True if we matched an existing session
 
 
-    - name: if there's no matching session exists, we have nothing to kill
+    - name: if there's no matching session (p_count==0), we have nothing to kill
       block:
       - name: there was no matching session
         debug:
