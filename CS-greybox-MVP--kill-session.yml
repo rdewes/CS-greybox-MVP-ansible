@@ -50,9 +50,16 @@
         debug:
           var: p_before.msg[0]      
       
-      - name: kill session
-        debug:
-          msg: "kill the session"
+      - name: killing the session
+        oracle_sql: 
+          hostname:       "{{ hostname }}" 
+          port:           "{{ port }}"
+          service_name:   "{{ service_name }}"
+          username:       "{{ username }}"
+          password:       "{{ password }}"
+          mode:           "{{ mode }}"
+          sql:            >
+                          alter system kill session '{{ sid }} , {{ serial }} , @{{ inst }}'
 
       - name: check post-kill status of session
         oracle_sql: 
