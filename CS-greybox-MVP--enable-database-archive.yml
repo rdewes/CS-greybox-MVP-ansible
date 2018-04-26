@@ -11,7 +11,7 @@
     tablename:          "{{ p_table }}"
 
   tasks:
-    - name: look for a table that matches the input parameters
+    - name: look for a table that matches the input parameters (and that isn't already maximally compressed)
       oracle_sql:
         hostname:       "{{ hostname }}" 
         port:           "{{ port }}"
@@ -24,6 +24,7 @@
                         from   all_tables 
                         where  owner = '{{ owner }}'
                         and    table_name = '{{ tablename }}'
+                        and   (compression != 'ENABLED' and compress_for != 'ARCHIVE HIGH')
       register: p_count
       
     - name: if the table exists (p_count==1), compress it
@@ -86,5 +87,5 @@
       block:
       - name: there was no matching table
         debug:
-          msg: "there was no table in this database with the specified name and owner"
+          msg: "there was no table that could be compressed in this database with the specified name and owner"
       when: 'p_count.msg[0].0 == 0'               # condition returns True if there was no matching table
