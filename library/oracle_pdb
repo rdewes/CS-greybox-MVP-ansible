@@ -166,7 +166,7 @@ def create_pdb(cursor, module, msg, oracle_home, name, sourcedb, pdb_admin_usern
 
     if unplug_dest is None:
 #       createsql += ' admin user %s identified by %s ' % (pdb_admin_username, pdb_admin_password)
-        createsql += ' from PDB1 keystore identified by %s ' % (pdb_admin_password)
+        createsql += ' from PDB3 keystore identified by %s ' % (pdb_admin_password)
 
     if datafile_dest != None:
         createsql += ' create_file_dest = \'%s\'' % (datafile_dest)
