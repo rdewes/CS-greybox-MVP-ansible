@@ -48,7 +48,7 @@
                           where  sid = '{{ sid }}'
                           and    serial# = '{{ serial }}'
                           and    inst_id = '{{ inst }}'
-       register: p_before
+        register: p_before
       
       - name: show output status check (pre)
         debug:
