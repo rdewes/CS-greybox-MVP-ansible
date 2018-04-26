@@ -58,7 +58,7 @@
           password:       "{{ password }}"
           mode:           "{{ mode }}"
           sql:            >
-                          alter table {{ owner }}.{{ tablename }} column store compress for archive high
+                          alter table {{ owner }}.{{ tablename }} move column store compress for archive high
 
       - name: check post-compress status of table
         oracle_sql: 
