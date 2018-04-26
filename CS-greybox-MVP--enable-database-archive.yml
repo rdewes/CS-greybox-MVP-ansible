@@ -48,16 +48,16 @@
         debug:
           var: p_before.msg[0]      
       
-#      - name: compressing the table
-#        oracle_sql: 
-#          hostname:       "{{ hostname }}" 
-#          port:           "{{ port }}"
-#          service_name:   "{{ service_name }}"
-#          username:       "{{ username }}"
-#          password:       "{{ password }}"
-#          mode:           "{{ mode }}"
-#          sql:            >
-#                          alter system kill session '{{ sid }},{{ serial }},@{{ inst }}'
+      - name: compressing the table
+        oracle_sql: 
+          hostname:       "{{ hostname }}" 
+          port:           "{{ port }}"
+          service_name:   "{{ service_name }}"
+          username:       "{{ username }}"
+          password:       "{{ password }}"
+          mode:           "{{ mode }}"
+          sql:            >
+                          alter table {{ owner }}.{{ tablename }} column store compress for archive high
 
       - name: check post-compress status of table
         oracle_sql: 
