@@ -59,7 +59,7 @@
           password:       "{{ password }}"
           mode:           "{{ mode }}"
           sql:            >
-                          alter system kill session '{{ sid }} , {{ serial }} , @{{ inst }}'
+                          alter system kill session '{{ sid }},{{ serial }},@{{ inst }}'
 
       - name: check post-kill status of session
         oracle_sql: 
