@@ -12,6 +12,7 @@
 
   tasks:
     - name: look for a table that matches the input parameters
+      oracle_sql:
         hostname:       "{{ hostname }}" 
         port:           "{{ port }}"
         service_name:   "{{ service_name }}"
