@@ -71,7 +71,7 @@
           password:       "{{ password }}"
           mode:           "{{ mode }}"
           sql:            >
-                          select 'Post-Kill Session Details (look for KILLED in status column'
+                          select 'Post-Kill Session Details (look for KILLED in status column)'
                           ,      inst_id, sid, serial#, username, machine, program, logon_time, status 
                           from   gv$session 
                           where  sid = '{{ sid }}'
