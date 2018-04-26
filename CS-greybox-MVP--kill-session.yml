@@ -12,7 +12,7 @@
     inst:               "{{ p_inst }}"
 
   tasks:
-    - name: check existing status of session
+    - name: look for a session that matches the input parameters
       oracle_sql: 
         hostname:       "{{ hostname }}" 
         port:           "{{ port }}"
@@ -59,7 +59,7 @@
           msg: "kill the session"
       when: 'p_count.msg[0].0 == 1'
 
-    - name: if there's no matching session exists, say so in debug output
+    - name: if there's no matching session exists, we have nothing to kill
       block:
       - name: there was no matching session
         debug:
