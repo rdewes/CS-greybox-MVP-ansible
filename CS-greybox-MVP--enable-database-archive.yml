@@ -11,8 +11,7 @@
     tablename:          "{{ p_table }}"
 
   tasks:
-    - name: check existing status of table
-      oracle_sql: 
+    - name: look for a table that matches the input parameters
         hostname:       "{{ hostname }}" 
         port:           "{{ port }}"
         service_name:   "{{ service_name }}"
@@ -20,19 +19,71 @@
         password:       "{{ password }}"
         mode:           "{{ mode }}"
         sql:            >
-                        select 'Table Exists', owner, table_name, tablespace_name 
+                        select count(*) 
                         from   all_tables 
                         where  owner = '{{ owner }}'
                         and    table_name = '{{ tablename }}'
-      register: p_before
+      register: p_count
       
-    - name: show output status check (pre)
-      debug:
-        var: p_before.msg[0]
-      
-    - name: iff the table exists, move it
+    - name: if the table exists (p_count==1), compress it
       block:
-      - name: move table
+      - name: check existing status of table
+        oracle_sql: 
+          hostname:       "{{ hostname }}" 
+          port:           "{{ port }}"
+          service_name:   "{{ service_name }}"
+          username:       "{{ username }}"
+          password:       "{{ password }}"
+          mode:           "{{ mode }}"
+          sql:            >
+                          select 'Prior State of Table'
+                          ,      owner, table_name, tablespace_name, compression, compress_for 
+                          from   all_tables 
+                          where  owner = '{{ owner }}'
+                          and    table_name = '{{ tablename }}'
+        register: p_before
+      
+      - name: show status check (pre)
         debug:
-          msg: "move the table"
-      when: '"Table Exists" in p_before.msg[0].0'       # do the stuff in this block only if the specified table exists
+          var: p_before.msg[0]      
+      
+#      - name: compressing the table
+#        oracle_sql: 
+#          hostname:       "{{ hostname }}" 
+#          port:           "{{ port }}"
+#          service_name:   "{{ service_name }}"
+#          username:       "{{ username }}"
+#          password:       "{{ password }}"
+#          mode:           "{{ mode }}"
+#          sql:            >
+#                          alter system kill session '{{ sid }},{{ serial }},@{{ inst }}'
+
+      - name: check post-compress status of table
+        oracle_sql: 
+          hostname:       "{{ hostname }}" 
+          port:           "{{ port }}"
+          service_name:   "{{ service_name }}"
+          username:       "{{ username }}"
+          password:       "{{ password }}"
+          mode:           "{{ mode }}"
+          sql:            >
+                          select 'Post-Compress State of Table'
+                          ,      owner, table_name, tablespace_name, compression, compress_for 
+                          from   all_tables 
+                          where  owner = '{{ owner }}'
+                          and    table_name = '{{ tablename }}'
+        register: p_after
+      
+      - name: show status check (post)
+        debug:
+          var: p_after.msg[0]      
+
+      when: 'p_count.msg[0].0 == 1'               # condition returns True if we matched an existing table
+
+
+    - name: if there's no matching table (p_count==0), we have nothing to do
+      block:
+      - name: there was no matching table
+        debug:
+          msg: "there was no table in this database with the specified name and owner"
+      when: 'p_count.msg[0].0 == 0'               # condition returns True if there was no matching table
