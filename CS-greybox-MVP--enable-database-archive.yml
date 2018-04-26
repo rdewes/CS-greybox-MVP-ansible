@@ -20,11 +20,11 @@
         password:       "{{ password }}"
         mode:           "{{ mode }}"
         sql:            >
-                        select count(*) 
-                        from   all_tables 
-                        where  owner = '{{ owner }}'
-                        and    table_name = '{{ tablename }}'
-                        and   (compression != 'ENABLED' and compress_for != 'ARCHIVE HIGH')
+                        select   count(*) 
+                        from     all_tables 
+                        where    owner = '{{ owner }}'
+                        and      table_name = '{{ tablename }}'
+                        and not (compression = 'ENABLED' and compress_for = 'ARCHIVE HIGH')
       register: p_count
       
     - name: if the table exists (p_count==1), compress it
