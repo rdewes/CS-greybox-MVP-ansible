@@ -93,5 +93,16 @@
           sql:            >
                           create pluggable database {{ targetpdb }} from {{ sourcepdb }}
                           keystore identified by {{ password }}
-                                    
+
+      - name: open the new pdb on all instances
+        oracle_sql: 
+          hostname:       "{{ hostname }}" 
+          port:           "{{ port }}"
+          service_name:   "{{ service_name }}"
+          username:       "{{ username }}"
+          password:       "{{ password }}"
+          mode:           "{{ mode }}"
+          sql:            >
+                          alter pluggable database {{ targetpdb }} open instances=all
+
       when: p_state == "clone"                                      # this is the test for the cloning case
