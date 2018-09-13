@@ -87,7 +87,7 @@
           service_name:   "{{ service_name }}"
           username:       "{{ username }}"
           password:       "{{ password }}"
-          mode:           "{{ mode }}
+          mode:           "{{ mode }}"
           sql:            >
                           create pluggable database {{ targetpdb }} from {{ sourcepdb }}
                           keystore identified by {{ password }}
