@@ -6,6 +6,8 @@
     service_name:       "{{ p_service }}"
     sourcedb:           "{{ p_cdb_name }}"
     pdbname:            "{{ p_pdb_name }}"
+    sourcepdb:          "{{ p_pdb_source }}"
+    targetpdb:          "{{ p_pdb_target }}"
     username:           "{{ p_sysdba_un }}"
     password:           "{{ p_sysdba_pw }}"
     mode:               sysdba
@@ -76,7 +78,18 @@
       
     - name: cloning tasks
       block:
-      - name: placeholder for custom cloning tasks
+      - name: placeholder for custom cloning tasks - just a basic version, for now
         debug:
           msg: "entering the cloning block"
+        oracle_sql: 
+          hostname:       "{{ hostname }}" 
+          port:           "{{ port }}"
+          service_name:   "{{ service_name }}"
+          username:       "{{ username }}"
+          password:       "{{ password }}"
+          mode:           "{{ mode }}
+          sql:            >
+                          create pluggable database {{ targetpdb }} from {{ sourcepdb }}
+                          keystore identified by {{ password }}
+                                    
       when: p_state == "clone"                                      # this is the test for the cloning case
