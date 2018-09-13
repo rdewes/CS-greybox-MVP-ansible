@@ -78,7 +78,7 @@
       
     - name: cloning tasks
       block:
-      - name: placeholder for custom cloning tasks - just a basic version, for now
+      - name: placeholder for custom cloning tasks, just a basic version for now
         debug:
           msg: "entering the cloning block"
         oracle_sql: 
