@@ -81,6 +81,8 @@
       - name: placeholder for custom cloning tasks, just a basic version for now
         debug:
           msg: "entering the cloning block"
+          
+      - name: create the target pdb as a clone of the source pdb
         oracle_sql: 
           hostname:       "{{ hostname }}" 
           port:           "{{ port }}"
